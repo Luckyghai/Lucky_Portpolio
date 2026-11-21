@@ -1,65 +1,72 @@
+import { experience, education } from "../data/portfolioData";
+
 export default function Experience() {
   return (
-    <section className="section experience-section">
-      <h1 className="section-title">Experience</h1>
-
-      <div className="experience-timeline">
-
-        {/* Experience 1 */}
-        <div className="experience-card">
-          <div className="experience-header">
-            <h2>AI Research Intern</h2>
-            <span className="company">Security Intelligence & Operations Center (SIOC), DMIHER</span>
-            <span className="duration">2024 – 2025</span>
-          </div>
-
-          <p className="experience-desc">
-            Worked on AI-powered surveillance and security analytics systems,
-            focusing on real-time video intelligence and red-flag detection
-            for public safety use cases.
-          </p>
-
-          <ul>
-            <li>Developed AI pipelines for CCTV-based surveillance systems</li>
-            <li>Worked on real-time activity and anomaly detection concepts</li>
-            <li>Assisted in integrating computer vision models into backend systems</li>
-            <li>Contributed to centralized monitoring and alert workflows</li>
-          </ul>
-
-          <div className="tech-stack">
-            <span>Computer Vision</span>
-            <span>AI Systems</span>
-            <span>Python</span>
-            <span>Video Analytics</span>
-          </div>
-        </div>
-
-        {/* Experience 2 */}
-        <div className="experience-card secondary">
-          <div className="experience-header">
-            <h2>Python Programming Intern</h2>
-            <span className="company">CodSoft</span>
-            <span className="duration">2023</span>
-          </div>
-
-          <p className="experience-desc">
-            Completed a Python programming internship focused on strengthening
-            fundamentals and implementing small-scale applications.
-          </p>
-
-          <ul>
-            <li>Worked on basic Python scripts and logic building</li>
-            <li>Practiced problem-solving and modular coding</li>
-            <li>Gained hands-on exposure to real-world coding tasks</li>
-          </ul>
-
-          <div className="tech-stack">
-            <span>Python</span>
-            <span>Programming Basics</span>
-          </div>
-        </div>
-
+    <div className="relative min-h-screen py-14 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-12 animate-fade-in-up">
+      {/* Header */}
+      <div className="space-y-2 border-b border-slate-800 pb-6">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Experience & Education
+        </h1>
+        <p className="text-slate-400 text-sm sm:text-base">
+          Professional engineering positions, research internships, and university education.
+        </p>
       </div>
-    </section>
+
+      {/* Experience List */}
+      <div className="space-y-8">
+        {experience.map((item, idx) => (
+          <div key={idx} className="premium-card p-6 sm:p-8 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 border-b border-slate-800/80 pb-3">
+              <div>
+                <div className="flex items-center gap-3 flex-wrap">
+                  <h2 className="text-xl font-bold text-white">
+                    {item.role}
+                  </h2>
+                  {item.current && (
+                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-medium">
+                      Current
+                    </span>
+                  )}
+                </div>
+                <p className="text-sm font-semibold text-sky-400 mt-1">{item.company}</p>
+              </div>
+              <span className="text-xs text-slate-400 font-medium bg-slate-900 px-3 py-1 rounded-full border border-slate-800 self-start sm:self-auto">
+                {item.period}
+              </span>
+            </div>
+
+            <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300 leading-relaxed">
+              {item.points.map((pt, pIdx) => (
+                <li key={pIdx} className="flex items-start gap-3">
+                  <span className="text-indigo-400 font-bold mt-0.5">•</span>
+                  <span>{pt}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+
+      {/* Education */}
+      <div className="space-y-4 pt-6 border-t border-slate-800/80">
+        <h2 className="text-2xl font-bold text-white">Education</h2>
+
+        <div className="premium-card p-6 sm:p-8 space-y-3">
+          <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1">
+            <h3 className="text-lg sm:text-xl font-bold text-white">{education.degree}</h3>
+            <span className="text-xs text-slate-400">{education.graduation}</span>
+          </div>
+
+          <p className="text-sm text-slate-300">{education.faculty}</p>
+          <p className="text-sm text-sky-400 font-medium">{education.institution}</p>
+
+          <div className="pt-2 text-sm text-emerald-400 font-semibold flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span>CGPA: {education.cgpa}</span>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

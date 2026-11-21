@@ -1,78 +1,56 @@
-import { useState } from "react";
+import { awards, leadership } from "../data/portfolioData";
+import { Award, Users } from "lucide-react";
 
 export default function Achievements() {
-  const [active, setActive] = useState(null);
-
-  const achievements = [
-    {
-      title: "DevFest Nagpur 2025 – Buildathon",
-      subtitle: "3rd Prize Winner · GDG Nagpur",
-      description:
-        "Secured 3rd place at DevFest Nagpur 2025 Buildathon organized by Google Developer Group (GDG) Nagpur. The competition focused on building impactful, scalable solutions. Our project demonstrated strong technical execution, innovation, and real-world applicability.",
-    },
-    {
-      title: "Bharatiya Antariksh Hackathon – 2024",
-      description:
-        "Participated in a national-level hackathon organized under Bharatiya Antariksh initiative, focusing on problem statements related to space technology, data processing, and secure systems.",
-    },
-    {
-      title: "NPTEL – Distributed Systems",
-      description:
-        "Completed NPTEL certification in Distributed Systems covering system design, fault tolerance, consistency models, and scalability.",
-    },
-    {
-      title: "Python for Data Analysis",
-      description:
-        "Hands-on certification covering data manipulation, visualization, exploratory data analysis, and working with real-world datasets using Python.",
-    },
-    {
-      title: "CDSS-4 – Cybersecurity Certification",
-      description:
-        "Cybersecurity certification covering network security, threat analysis, secure systems, and defensive strategies.",
-    },
-  ];
-
   return (
-    <section className="section">
-      <h1 className="section-title">Achievements & Certifications</h1>
-
-      <div className="achievement-grid">
-        {achievements.map((item, index) => (
-          <div
-            key={index}
-            className="achievement-card clickable"
-            onClick={() => setActive(item)}
-          >
-            <h3>{item.title}</h3>
-            {item.subtitle && (
-              <p className="subtitle">{item.subtitle}</p>
-            )}
-          </div>
-        ))}
+    <div className="relative min-h-screen py-14 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto space-y-10 animate-fade-in-up">
+      {/* Header */}
+      <div className="space-y-2 border-b border-slate-800 pb-6">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+          Awards & Leadership
+        </h1>
+        <p className="text-slate-400 text-sm sm:text-base">
+          Competitive hackathon honors, certifications, and developer community leadership.
+        </p>
       </div>
 
-      {/* MODAL */}
-      {active && (
-        <div className="modal-overlay" onClick={() => setActive(null)}>
-          <div
-            className="modal-box"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h2>{active.title}</h2>
-            {active.subtitle && (
-              <p className="modal-subtitle">{active.subtitle}</p>
-            )}
-            <p className="modal-text">{active.description}</p>
-
-            <button
-              className="modal-close"
-              onClick={() => setActive(null)}
-            >
-              Close
-            </button>
-          </div>
+      {/* Section 1: Awards & Certifications */}
+      <div className="space-y-4">
+        <div className="flex items-center gap-2 text-sky-400">
+          <Award className="w-5 h-5" />
+          <h2 className="text-xl font-bold text-white">Awards & Certifications</h2>
         </div>
-      )}
-    </section>
+
+        <div className="premium-card p-6 sm:p-7 space-y-3">
+          <ul className="space-y-3 text-sm text-slate-300">
+            {awards.map((item, idx) => (
+              <li key={idx} className="flex items-start gap-3 leading-relaxed">
+                <span className="w-2 h-2 rounded-full bg-sky-400 mt-1.5 shrink-0"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Section 2: Achievements & Leadership */}
+      <div className="space-y-4 pt-4">
+        <div className="flex items-center gap-2 text-indigo-400">
+          <Users className="w-5 h-5" />
+          <h2 className="text-xl font-bold text-white">Achievements & Leadership</h2>
+        </div>
+
+        <div className="premium-card p-6 sm:p-7 space-y-3">
+          <ul className="space-y-3 text-sm text-slate-300">
+            {leadership.map((item, idx) => (
+              <li key={idx} className="flex items-start gap-3 leading-relaxed">
+                <span className="w-2 h-2 rounded-full bg-indigo-400 mt-1.5 shrink-0"></span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
   );
 }
