@@ -1,4 +1,5 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -10,9 +11,25 @@ import Experience from "./pages/Experience";
 import Achievements from "./pages/Achievements";
 import Contact from "./pages/Contact";
 
+function CanonicalManager() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const canonicalLink = document.querySelector('link[rel="canonical"]');
+    const path = location.pathname;
+    const fullUrl = `https://lucky-portpolio.vercel.app${path === "/" ? "/" : path}`;
+    if (canonicalLink) {
+      canonicalLink.setAttribute("href", fullUrl);
+    }
+  }, [location.pathname]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <>
+      <CanonicalManager />
       <Navbar />
 
       <Routes>
